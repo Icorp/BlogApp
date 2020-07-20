@@ -1,0 +1,13 @@
+{
+  "config": [
+    {
+      "port": ":8080",
+      "upstreams": [
+        {
+          "path": "",
+          "method": ""
+        }
+      ]
+    }
+  ]
+}
