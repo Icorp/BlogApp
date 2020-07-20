@@ -1,8 +1,6 @@
 # VirtualTruckPanel
----
-Webapp on golang
+
 This webapp about truckers.
----
 
 ### Install
 
