@@ -1,6 +1,6 @@
 # VirtualTruckPanel
 ---
-__Webapp on golang :)__
+Webapp on golang
 This webapp about truckers.
 ---
 
