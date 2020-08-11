@@ -19,6 +19,7 @@ func New(config *Config) *APIserver {
 	return &APIserver{
 		config: config,
 		logger: logrus.New(),
+		router: mux.NewRouter(),
 	}
 }
 
@@ -27,8 +28,11 @@ func (s *APIserver) Start() error {
 	if err := s.configureLogger(); err != nil {
 		return err
 	}
+
 	s.configureRouter()
+
 	s.logger.Info("starting api server")
+
 	return http.ListenAndServe(s.config.BindAddr, s.router)
 }
 
