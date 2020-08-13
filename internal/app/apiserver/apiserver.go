@@ -45,12 +45,20 @@ func (s *APIserver) configureLogger() error {
 	return nil
 }
 func (s *APIserver) configureRouter() {
-	s.router.HandleFunc("/hello", s.handleHello())
+	s.router.HandleFunc("/akatu", s.handleHello())
+	s.router.HandleFunc("/",s.handleIndex())
 }
 
 func (s *APIserver) handleHello() http.HandlerFunc {
 	//...
 	return func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "Hello")
+		io.WriteString(w, "akatu")
+	}
+}
+
+func (s *APIserver) handleIndex() http.HandlerFunc  {
+	//...
+	return func(w http.ResponseWriter, r *http.Request) {
+		tmpl := http.FileServer(http.Dir("./wwwroot"))
 	}
 }
