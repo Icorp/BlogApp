@@ -2,14 +2,15 @@
 
 This webapp about truckers.
 
-### Install
+### Build
 
 ```
-go get github.com/Icorp/VirtualTruckPanel
+go build -v ./cmd/apiserver
 ```
+Go build is creating `apiserver.exe` file.
 
-### Install
+### Running
 
 ```
-go run main.go
+open apiserver.exe
 ```

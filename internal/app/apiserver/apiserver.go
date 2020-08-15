@@ -3,7 +3,6 @@ package apiserver
 import (
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
-	"io"
 	"net/http"
 )
 
@@ -36,6 +35,7 @@ func (s *APIserver) Start() error {
 	return http.ListenAndServe(s.config.BindAddr, s.router)
 }
 
+// Logger...
 func (s *APIserver) configureLogger() error {
 	level, err := logrus.ParseLevel(s.config.LogLevel)
 	if err != nil {
@@ -44,13 +44,12 @@ func (s *APIserver) configureLogger() error {
 	s.logger.SetLevel(level)
 	return nil
 }
+
+// Congigure Router
 func (s *APIserver) configureRouter() {
-	s.router.HandleFunc("/hello", s.handleHello())
+	s.router.Handle("/",http.FileServer(http.Dir("./views/")))
+	s.router.PathPrefix("/static/").Handler(
+		http.StripPrefix("/static/",http.FileServer(http.Dir("./static/"))))
 }
 
-func (s *APIserver) handleHello() http.HandlerFunc {
-	//...
-	return func(w http.ResponseWriter, r *http.Request) {
-		io.WriteString(w, "Hello")
-	}
-}
+
