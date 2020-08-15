@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"github.com/BurntSushi/toml"
-	"github.com/Icorp/BlogApp/internal/app/apiserver"
+	"github.com/Icorp/VirtualTruckPanel/internal/app/apiserver"
 	"log"
 )
 
