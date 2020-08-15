@@ -3,6 +3,7 @@ package apiserver
 import (
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
+	"io"
 	"net/http"
 )
 
@@ -47,9 +48,25 @@ func (s *APIserver) configureLogger() error {
 
 // Congigure Router
 func (s *APIserver) configureRouter() {
+
 	s.router.Handle("/",http.FileServer(http.Dir("./views/")))
 	s.router.PathPrefix("/static/").Handler(
 		http.StripPrefix("/static/",http.FileServer(http.Dir("./static/"))))
+
+	s.router.HandleFunc("/akatu", s.handleHello())
+	s.router.HandleFunc("/",s.handleIndex())
 }
 
+func (s *APIserver) handleHello() http.HandlerFunc {
+	//...
+	return func(w http.ResponseWriter, r *http.Request) {
+		io.WriteString(w, "akatu")
+	}
+}
 
+func (s *APIserver) handleIndex() http.HandlerFunc  {
+	//...
+	return func(w http.ResponseWriter, r *http.Request) {
+		tmpl := http.FileServer(http.Dir("./wwwroot"))
+	}
+}
